@@ -1,4 +1,5 @@
 const express = require('express')
+const sequelize = require('./config/sequelize')
 
 const port = 3005
 const app = express()
@@ -10,6 +11,12 @@ app.get('*', (req, res) => {
         data: null,
         error: 'route not found'
     })
+})
+
+sequelize.authenticate().then(() => {
+    console.log("Connected to sql db successfully!");
+}).catch((err) => {
+    console.log(err);
 })
 
 app.listen(port, () => console.log(`listening on port: ${port}`))
