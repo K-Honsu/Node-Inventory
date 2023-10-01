@@ -6,7 +6,9 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/config.json')[env];
+const config = require(__dirname + '/../config/config.js')[env];
+const userModel = require('./user')
+const adminModel = require('./admin')
 const db = {};
 
 let sequelize;
@@ -34,10 +36,13 @@ fs
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
-  }
+  } 
 });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.users = userModel(sequelize, sequelize.DataTypes)
+db.admin = adminModel(sequelize, sequelize.DataTypes)
 
 module.exports = db;
