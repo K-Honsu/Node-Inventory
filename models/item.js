@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
      */
     static associate(models) {
       // define association here
-      Item.hasOne(models.categories, {
+      Item.hasOne(models.Category, {
         foreignKey  : {
           type : DataTypes.INTEGER
         }
@@ -20,15 +20,18 @@ module.exports = (sequelize) => {
     id : {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      defaultValue: DataTypes.INTEGER,
+      // defaultValue: DataTypes.INTEGER,
+      autoIncrement : true
     },
     category_id : {
       type : DataTypes.INTEGER,
       allowNull : false,
-      unique : true
+      unique : true,
+      // defaultValue : DataTypes.INTEGER,
+      // autoIncrement : true
     },
     name: DataTypes.STRING,
-    price: DataTypes.DECIMAL,
+    price: DataTypes.INTEGER,
     size: {
       type : DataTypes.ENUM,
       values : ["large", "medium", "small"]

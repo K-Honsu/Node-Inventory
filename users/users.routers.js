@@ -5,7 +5,7 @@ const middlewares = require('./users.middlewares')
 
 const router = express.Router()
 
-router.post("/create", middlewares.checkUserCreaction, controller.createUser)
+router.post("/create", middlewares.validateUserCreation, controller.createUser)
 router.get('/', controller.findUsers)
 
 

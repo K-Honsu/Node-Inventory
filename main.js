@@ -1,7 +1,9 @@
 const express = require('express')
 const sequelize = require('./config/sequelize')
 const userRouter = require('./users/users.routers')
+const categoryRouter = require("./categories/categories.routers")
 const adminRouter = require('./admins/admins.routers')
+const itemRouter = require('./items/items.router')
 
 const port = 3005
 const app = express()
@@ -9,6 +11,8 @@ const app = express()
 app.use(express.json())
 app.use("/users", userRouter)
 app.use("/admins", adminRouter)
+app.use("/category", categoryRouter)
+app.use("/items", itemRouter)
 
 app.get('*', (req, res) => {
     return res.status(404).json({

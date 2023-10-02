@@ -9,6 +9,8 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const userModel = require('./user')
 const adminModel = require('./admin')
+const categoryModel = require('./category')
+const itemModel = require('./item')
 const db = {};
 
 let sequelize;
@@ -44,5 +46,7 @@ db.Sequelize = Sequelize;
 
 db.users = userModel(sequelize, sequelize.DataTypes)
 db.admin = adminModel(sequelize, sequelize.DataTypes)
+db.item = itemModel(sequelize, sequelize.DataTypes)
+db.category = categoryModel(sequelize, sequelize.DataTypes)
 
 module.exports = db;

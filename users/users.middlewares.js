@@ -1,42 +1,27 @@
-const checkUserCreaction = (req, res, next) => {
-    if (!req.body.first_name || !req.body.first_name.trim()){
-        return res.status(400).json({
-            error : "Your first name is required"
-        })
-    }
+const Joi = require('joi')
 
-    if (!req.body.last_name || !req.body.last_name.trim()){
-        return res.status(400).json({
-            error : "Your last name is required"
-        })
-    }
 
-    if (!req.body.username || !req.body.username.trim()){
-        return res.status(400).json({
-            error : "Your username is required"
+const validateUserCreation = async (req, res, next) => {
+    try {
+        const schema = Joi.object({
+            first_name : Joi.string().required(),
+            last_name : Joi.string().required(),
+            username : Joi.string().required(),
+            email : Joi.string().email(),
+            gender : Joi.string().valid("male", "female").required(),
+            password : Joi.string().required()
         })
-    }
 
-    if (!req.body.gender || !req.body.gender.trim()){
-        return res.status(400).json({
-            error : "Your gender is required"
+        const valid = await schema.validateAsync(req.body, {abortEarly: true})
+        next()
+    } catch (error) {
+        return res.status(201).json({
+            status : "error",
+            message : error.message
         })
     }
-
-    if (!req.body.email || !req.body.email.trim()){
-        return res.status(400).json({
-            error : "Your email is required"
-        })
-    }
-
-    if (!req.body.password || !req.body.password.trim()){
-        return res.status(400).json({
-            error : "Your password is required"
-        })
-    }
-    next()
 }
 
 module.exports = {
-    checkUserCreaction
+    validateUserCreation
 }

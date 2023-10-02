@@ -1,4 +1,6 @@
 const db = require('../models/index')
+const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken')
 const userModel = db.users
 
 const findUsers = async (req, res) => {
@@ -9,7 +11,6 @@ const findUsers = async (req, res) => {
           data: users,
         });
       } catch (error) {
-        console.error(error);
         return res.status(400).json({
           message: "error",
           status: error.message,
@@ -20,20 +21,22 @@ const findUsers = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         const {first_name, last_name, username, gender, email, password} = req.body
+        const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = await userModel.create({
             first_name,
             last_name,
             email,
             username,
             gender,
-            password
+            password : hashedPassword
         })
+        const token = await jwt.sign({email : newUser.email, id :newUser.id}, process.env.JWT_SECRET)
         return res.status(201).json({
             status : "User Created Successfully",
-            message : newUser
+            message : newUser,
+            token
         })
     } catch (error) {
-        console.log(error);
         return res.status(400).json({
             message : "error",
             status : error.message
