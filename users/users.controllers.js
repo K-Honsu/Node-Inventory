@@ -30,7 +30,7 @@ const createUser = async (req, res) => {
             gender,
             password : hashedPassword
         })
-        const token = await jwt.sign({email : newUser.email, id :newUser.id}, process.env.JWT_SECRET)
+        const token = await jwt.sign({email : newUser.email, id :newUser.id}, process.env.JWT_SECRET, {expiresIn: "1h"})
         return res.status(201).json({
             status : "User Created Successfully",
             message : newUser,

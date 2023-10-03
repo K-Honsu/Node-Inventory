@@ -1,5 +1,6 @@
 'use strict';
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require("bcrypt")
 module.exports = (sequelize) => {
   class User extends Model {
     /**
@@ -31,5 +32,21 @@ module.exports = (sequelize) => {
     createdAt : "created_at",
     updatedAt : "updated_at"
   });
+
+  User.beforeCreate(async (user, next) => {
+    const saltRounds = 10
+    try {
+      const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+      user.password = hashedPassword;
+      next()
+    } catch (error) {
+      throw new Error("Error hashing password")
+    }
+  })
+
+  User.prototype.isValidPassword = async function(password){
+    const compare = await bcrypt.compare(password, this.password)
+    return compare
+  }
   return User;
 }; 
