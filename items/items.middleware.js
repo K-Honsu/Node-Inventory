@@ -1,3 +1,4 @@
+const Joi = require("joi")
 const db = require('../models/index')
 const categoryItem = db.category
 
@@ -25,10 +26,24 @@ const category_id_in_db = async (req, res, next) => {
         console.error(error);
         return res.status(400).json({ message: 'Invalid ID' });
     }
+}
 
+const categoryDataType = async (req, res) => {
+    try {
+        const schema = Joi.object({
+            category_id : Joi.number().required()
+        })
+        await schema.validateAsync(req.body, {abortEarly : true})
+    } catch (error) {
+        return res.status(422).json({
+            status : "error",
+            message : error.message
+        })
+    }
 }
 
 module.exports = {
     checkSize,
-    category_id_in_db
+    category_id_in_db,
+    categoryDataType
 }

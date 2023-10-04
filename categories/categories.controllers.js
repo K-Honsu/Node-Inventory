@@ -74,10 +74,9 @@ const deleteCategory = async (req, res) => {
             status : "success",
             message : "Category deleted successfully"
         })
-        // await categoryModel.destroy(category)
     } catch (error) {
         return res.status(404).json({
-            status : "failed",
+            status : "error",
             message : error.message
         })
     }
