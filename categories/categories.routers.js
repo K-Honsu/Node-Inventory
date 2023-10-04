@@ -10,4 +10,4 @@ router.post("/create", authMiddleware.AdminBearerAuthToken, middleware.validInpu
 router.patch("/update/:id", authMiddleware.AdminBearerAuthToken, middleware.validInput, controller.updateCategory)
 router.delete("/delete/:id", authMiddleware.AdminBearerAuthToken, controller.deleteCategory)
 
-module.exports = router;
+module.exports = router
