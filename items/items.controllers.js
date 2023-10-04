@@ -36,7 +36,7 @@ const getAllItems = async (req, res) => {
           });
     }
 
-}
+};
 
 const updateItem = async (req, res) => {
     try {
