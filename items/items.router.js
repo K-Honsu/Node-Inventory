@@ -1,11 +1,12 @@
 const express = require('express')
 const controller = require('./items.controllers')
 const middleware = require('./items.middleware')
+const authMiddleware = require("../middlewares/global.middlewares")
 
 
 const router = express.Router()
-router.get('/', controller.getAllItems)
-router.post("/create", middleware.checkSize, middleware.category_id_in_db, controller.createItem)
+router.get('/', authMiddleware.UserBearerAuthToken, controller.getAllItems)
+router.post("/create", authMiddleware.AdminBearerAuthToken, middleware.checkSize, middleware.category_id_in_db, controller.createItem)
 
 
 module.exports = router

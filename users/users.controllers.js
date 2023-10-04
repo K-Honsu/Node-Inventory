@@ -1,7 +1,8 @@
 const db = require('../models/index')
-const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 const userModel = db.users
+require("dotenv").config()
+
 
 const findUsers = async (req, res) => {
     try {
@@ -21,14 +22,13 @@ const findUsers = async (req, res) => {
 const createUser = async (req, res) => {
     try {
         const {first_name, last_name, username, gender, email, password} = req.body
-        const hashedPassword = await bcrypt.hash(password, 10)
         const newUser = await userModel.create({
             first_name,
             last_name,
             email,
             username,
             gender,
-            password : hashedPassword
+            password 
         })
         const token = await jwt.sign({email : newUser.email, id :newUser.id}, process.env.JWT_SECRET, {expiresIn: "1h"})
         return res.status(201).json({

@@ -32,21 +32,17 @@ module.exports = (sequelize) => {
     createdAt : "created_at",
     updatedAt : "updated_at"
   });
-
-  User.beforeCreate(async (user, next) => {
-    const saltRounds = 10
+  User.beforeCreate(async (user) => {
     try {
-      const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-      user.password = hashedPassword;
-      next()
+      const hash = await bcrypt.hash(user.password, 10);
+      user.password = hash;
     } catch (error) {
-      throw new Error("Error hashing password")
+      throw new Error("Error hashing password");
     }
-  })
-
-  User.prototype.isValidPassword = async function(password){
-    const compare = await bcrypt.compare(password, this.password)
-    return compare
-  }
+  });
+  
+  User.prototype.IsValidPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
+  };
   return User;
 }; 
