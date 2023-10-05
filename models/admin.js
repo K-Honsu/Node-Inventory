@@ -4,10 +4,6 @@ const objectID = Schema.ObjectId
 const id = mongoose.Types.ObjectId
 
 const AdminSchema = new Schema({
-    _id : {
-        type : String,
-        default : new id
-    },
     user_id : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "users"
