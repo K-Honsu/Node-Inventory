@@ -13,17 +13,17 @@ module.exports = {
      * }], {});
     */
    await queryInterface.bulkInsert("Items", [{
-    id : 3,
+    id : 8,
     name : "Day in the life of a software Engineer",
-    price : "40",
+    price : 40,
     size : "large",
     category_id : 1,
     created_at : new Date(),
     updated_at : new Date(),
    }, {
-    id : 2,
+    id : 9,
     name : "Day in the life of a principal Engineer",
-    price : "100",
+    price : 100,
     size : "small",
     category_id : 1,
     created_at : new Date(),
