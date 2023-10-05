@@ -1,4 +1,6 @@
 const UserModel = require("../models/user")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 const Login = async (req, res) => {
     try {
@@ -12,9 +14,18 @@ const Login = async (req, res) => {
                 message : "User does not exist"
             })
         }
+
+        const validPassword = await user.IsValidPassword(password)
+        if(!validPassword) {
+            return res.status(422).json({
+                message : "Email or Password is not correct"
+            })
+        }
+        const token = jwt.sign({email : user.email, _id : user._id}, process.env.JWT_SECRET, {expiresIn : "1hr"})
         return res.status(201).json({
             status : "success",
-            data : user
+            data : user,
+            token
         })
     } catch (error) {
         return res.status(422).json({
@@ -22,4 +33,9 @@ const Login = async (req, res) => {
             message : error.message
         })
     }
+}
+
+
+module.exports = {
+    Login
 }
