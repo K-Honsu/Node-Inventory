@@ -1,7 +1,7 @@
 {
   "name": "node-inventory",
   "version": "1.0.0",
-  "description": "This is a repo containing a full database api integration with sql and mongodb",
+  "description": "This is a repo containing a full database api integration with MYSQL and Sequelize",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
