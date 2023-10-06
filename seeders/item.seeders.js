@@ -1,6 +1,8 @@
 const ItemModel = require("../models/item")
 const config = require("../config/mongoose")
 
+// rest of seeder file was done with controller. view items/items.controller.js for more reference.
+
 config.connect().then(async () => {
    await  ItemModel.insertMany([{
     name : "toys",
