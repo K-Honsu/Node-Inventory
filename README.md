@@ -57,7 +57,7 @@ Connected to mongoDB successfully
 
 ## Usage / Documentation
 
-- Please reference API DOCUMENTATION done with Postman Here [https://documenter.getpostman.com/view/25856069/2s9YJgSKz9]
+- Please reference API DOCUMENTATION done with Postman Here [Postman-Reference](https://documenter.getpostman.com/view/25856069/2s9YJgSKz9)
 
 - Note some endpoint require Token. Apply where necessary and {PORT} requires you to input the port value specified in .env file.
 
