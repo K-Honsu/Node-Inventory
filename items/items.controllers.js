@@ -15,7 +15,7 @@ const createItem = async (req, res) => {
             data : itm
         })
     } catch (error) {
-        return res.status(400).json({
+        return res.status(422).json({
             status : "error",
             message : error.message
         })
@@ -55,7 +55,7 @@ const updateItem = async (req, res) => {
             data : updatedItem
         })
     } catch (error) {
-        return res.status(404).json({
+        return res.status(422).json({
             status : "failed",
             message : error.message
         })

@@ -12,6 +12,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    // rest of seeder files were done using a controller -> view items/items.controllers.js for more reference
    await queryInterface.bulkInsert("Items", [{
     id : 8,
     name : "Day in the life of a software Engineer",

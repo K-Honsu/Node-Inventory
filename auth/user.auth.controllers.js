@@ -11,7 +11,7 @@ const Login = async (req, res) => {
     });
   
     if (!existingUser) {
-      return res.status(409).json({
+      return res.status(404).json({
         status: "error",
         message: "User not found",
       });
