@@ -1,4 +1,4 @@
-# Node-Inventory - NOSQL Implementation using Sequelize on MYSQL
+# Node-Inventory - Implementation using Sequelize on MYSQL
 
 # Description
 - This repo aims at basic CRUD functionalities with node using Sequelize and MYSQL DB.
