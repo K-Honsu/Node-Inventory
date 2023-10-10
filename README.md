@@ -1,4 +1,4 @@
-# Node-Inventory - NOSQL Implementation using Sequelize and MongoDB
+# Node-Inventory - Implementation using Sequelize and MongoDB
 
 # Description
 - This repo aims at basic CRUD functionalities with node using  with sql and mongodb.
